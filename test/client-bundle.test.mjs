@@ -98,7 +98,7 @@ test('configCommandLine renders the list subtitle', () => {
 });
 
 test('matchesQuery searches id, command and args case-insensitively', () => {
-  const server = { id: 'blender', command: 'D:\\tools\\uvx.exe', args: ['blender-mcp'] };
+  const server = { id: 'blender', command: 'C:\\tools\\uvx.exe', args: ['blender-mcp'] };
   assert.equal(t.matchesQuery(server, ''), true);
   assert.equal(t.matchesQuery(server, '   '), true);
   assert.equal(t.matchesQuery(server, 'BLEND'), true);
@@ -122,7 +122,7 @@ test('toolSummary clamps a description to one dense line', () => {
 test('serverToDraft / draftToServer round-trip a full server', () => {
   const server = {
     id: 'blender',
-    command: 'D:\\tools\\miniconda3\\Scripts\\uvx.exe',
+    command: 'C:\\tools\\miniconda3\\Scripts\\uvx.exe',
     args: ['blender-mcp'],
     env: { BLENDER_HOST: 'localhost', BLENDER_PORT: '9876' },
     cwd: 'D:\\work',
