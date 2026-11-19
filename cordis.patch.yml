@@ -1,0 +1,32 @@
+# dsh-mcp-client bundle patch.
+#
+# 挂载本插件的一行（id 稳定，便于后层按 id 覆盖 config）。
+#
+# 默认不带任何 server：不开任何子进程、不注册任何工具，装上即安静。
+# 要接入一个 MCP server，在你的 profile cordis.patch.yml（或 --patch 文件）里
+# 按 id 覆盖 config.servers —— 注意 config 是**整段替换**，不是深合并，
+# 所以覆盖时要重述所有还需要保留的键。
+#
+# 例：
+#   - id: mcp-client
+#     name: dsh-mcp-client
+#     config:
+#       verbose: true
+#       servers:
+#         - id: blender
+#           command: uvx
+#           args: ["blender-mcp"]
+#
+# 未写在这里的字段走 normalizeConfig 的默认值：
+#   enabled: true、toolPrefix: "mcp"、connectTimeoutMs: 20000、
+#   callTimeoutMs: 60000、graceMs: 3000、awaitStartupMs: 10000、
+#   protocolVersion: "2025-06-18"、resyncDebounceMs: 250；
+#   每个 server 的 enabled: true、args: []、env: {}。
+- insert:
+    - id: mcp-client
+      name: dsh-mcp-client
+      config:
+        # 打开后会额外输出连接进度、server 主动通知等诊断日志。
+        verbose: false
+        # 接入的 MCP server 列表；每项至少需要 id 与 command。
+        servers: []
